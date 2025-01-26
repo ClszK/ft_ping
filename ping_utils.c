@@ -1,5 +1,10 @@
 #include "ping.h"
 
+void error_exit(const char *msg, int exit_code) {
+  fprintf(stderr, "ft_ping: %s\n", msg);
+  exit(exit_code);
+}
+
 int is_valid_ipv4(const char *ip) {
   struct sockaddr_in sa;
 
