@@ -3,9 +3,11 @@
 
 #include <arpa/inet.h>
 #include <errno.h>
+#include <math.h>
 #include <netdb.h>
 #include <netinet/ip.h>
 #include <netinet/ip_icmp.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -48,6 +50,7 @@ int resolve_host(const char* host,
 void create_icmp_packet(char* packet, int seq,
                         int payload_size);
 int receive_ping_reply(int sock, pid_t id, int seq,
-                       struct timeval* rtt);
+                       struct timeval* rtt, int* ttl,
+                       struct sockaddr_in* src_addr);
 
 #endif
