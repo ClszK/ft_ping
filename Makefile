@@ -8,18 +8,19 @@ OBJDIR      = build
 OBJS        = $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 DEPS        = $(patsubst %.c, $(OBJDIR)/%.d, $(SRCS))
 
-CXX         = cc
-CXXFLAGS    = -Wall -Wextra -Werror -MMD -MP
+CC 	        = gcc
+CFLAGS    = -Wall -Wextra -Werror -MMD -MP
+LDFLAGS		= -lm
 
 all:    $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) $(LDFLAGS)-o $(NAME)
 
 -include $(DEPS)
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
